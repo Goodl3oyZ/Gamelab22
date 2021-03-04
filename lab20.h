@@ -2,8 +2,8 @@
 #include<string>
 #include<ctime>
 #include<cstdlib>
-#include<iomanip>
 #include<vector>
+#include<iomanip>
 
 using namespace std;
 
@@ -31,13 +31,14 @@ class Unit{
 		void showStatus();
 		void newTurn();
 		int attack(Unit &);
+		int ultimateAttack(Unit &); 
 		int beAttacked(int);
 		int heal();	
 		void guard();
+		void dodge(); 
 		bool isDead();
-		void equip(Equipment *); 
+		void equip(Equipment *);  
 };
-
 
 Unit::Unit(string t,string n){ 
 	type = t;
@@ -53,7 +54,7 @@ Unit::Unit(string t,string n){
 	}
 	hp = hpmax;	
 	guard_on = false;
-	equipment = 0;
+	equipment = NULL;
 }
 
 void Unit::showStatus(){
@@ -72,11 +73,7 @@ void Unit::showStatus(){
 }
 
 void Unit::newTurn(){
-	guard_on = false;
-}
-
-int Unit::attack(Unit &u){
-	return u.beAttacked(atk);
+	guard_on = false; 
 }
 
 int Unit::beAttacked(int oppatk){
@@ -84,29 +81,27 @@ int Unit::beAttacked(int oppatk){
 	if(oppatk > def){
 		dmg = oppatk-def;	
 		if(guard_on) dmg = dmg/3;
-		if(dodge_on){
-			if(rand()%10 == 0) dmg = 0;
-			else dmg = 2*dmg;
-		}	
-	}
-	
+	}	
 	hp -= dmg;
 	if(hp <= 0){hp = 0;}
 	
 	return dmg;	
 }
 
+int Unit::attack(Unit &opp){
+	return opp.beAttacked(atk);
+}
+
 int Unit::heal(){
-	int temp = hp;
-	hp += rand()%21+10;
-	if(hp > hpmax)  hp = hpmax;
-	return hp-temp;
+	int h = rand()%21 + 10;
+	if(hp + h > hpmax) h = hpmax - hp;
+	hp = hp + h;
+	return h;
 }
 
 void Unit::guard(){
 	guard_on = true;
-}
-
+}	
 
 bool Unit::isDead(){
 	if(hp <= 0) return true;

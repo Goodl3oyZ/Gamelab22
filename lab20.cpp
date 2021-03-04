@@ -1,5 +1,5 @@
-// Include header file.
-
+// [Missing Code 1] Include header file.
+  
 int main(){
 	srand(time(0));
 	
@@ -9,13 +9,16 @@ int main(){
 	Unit hero("Hero",name);
 	
 	Equipment sword(0,8,4);
-	// Create Equipment axes, shield and armor here
+	// [Missing Code 2]  Create Equipment axes, shield and armor here
+
+	
 	
 	char eq;	
 	cout << " [1] Sword \n [2] Axes \n [3] Shield \n [4] Armor \n";
 	cout << "Please selet your equipment: ";
 	cin >> eq;
-	// Equip an equipment to the hero. 
+	// [Missing Code 3] Equip a selected equipment to the hero. 
+
 	
 	
 	Unit mons("Monster","Kraken");
@@ -54,7 +57,9 @@ int main(){
 			cout << " [1] Sword \n [2] Axes \n [3] Shield \n [4] Armor \n";
 			cout << "Please select your equipment: ";
 			cin >> eq;
-		// Equip an equipment to the hero. 
+			// [Missing Code 3] Equip a selected equipment to the hero.
+
+			
 		}
 		
 		if(player_action == 'A') p = hero.attack(mons); 
